@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Jumpable
   - PowerUp
   - Avoidable
+  - Jumpable
   layers:
   - Default
   - TransparentFX

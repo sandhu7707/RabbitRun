@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 292462574704525730}
   - component: {fileID: 4409478135344682893}
   - component: {fileID: 9066108796892171012}
-  - component: {fileID: 4131944894339458206}
   m_Layer: 0
   m_Name: Jumpable Obstacle
   m_TagString: Jumpable
@@ -184,9 +183,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3346977995990886704, guid: 886bba1d52d838144866f6fc932d2268, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9066108796892171012}
-    - targetCorrespondingSourceObject: {fileID: 3346977995990886704, guid: 886bba1d52d838144866f6fc932d2268, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4131944894339458206}
   m_SourcePrefab: {fileID: 100100000, guid: 886bba1d52d838144866f6fc932d2268, type: 3}
 --- !u!136 &9066108796892171012
 CapsuleCollider:
@@ -211,30 +207,3 @@ CapsuleCollider:
   m_Height: 2.0000005
   m_Direction: 1
   m_Center: {x: -0.00000005960463, y: 0, z: -0.00000008940697}
---- !u!54 &4131944894339458206
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619216817074891990}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2

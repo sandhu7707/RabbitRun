@@ -8,7 +8,9 @@ public class GenerateMeshEditor: Editor
     {
         ProceduralGeneration proceduralGeneration = target as ProceduralGeneration;
         if(GUILayout.Button("Generate Block")){
-            proceduralGeneration.CreateTerrainBlock();
+            proceduralGeneration.AddTerrainBlock();
+            proceduralGeneration.AddTerrainBlock();
+            proceduralGeneration.AddTerrainBlock();
         }
 
         base.OnInspectorGUI();
