@@ -15,7 +15,7 @@ public class PlayerConfig : MonoBehaviour
     public float speedIncreaseStep;
     public float maxMoveSpeed;
     public TextMesh powerCount;
-    int hopHeight = 1;
+    float hopHeight = 0.5f;
     Vector3 jumpForce;
     Vector3 hopJumpForce;
     float lastVelocityY;
@@ -24,7 +24,6 @@ public class PlayerConfig : MonoBehaviour
     float hopDurationInitial;
     float timeToTop;
     bool insideJump;
-    bool wasTouchActive;
     [Min(1)]
     float gravityFactor=2;
 
@@ -45,17 +44,17 @@ public class PlayerConfig : MonoBehaviour
                 hopDurationInitial = clip.length;
             }
         }
-        GetComponent<Rigidbody>().AddForce(Physics.gravity*(gravityFactor-1), ForceMode.Acceleration);
+        // GetComponent<Rigidbody>().AddForce(Physics.gravity*(gravityFactor-1), ForceMode.Acceleration);
     }
     void Update(){
 
-        hopJumpForce = new Vector3(0, GetComponent<Rigidbody>().mass * Mathf.Sqrt(2*Physics.gravity.magnitude*hopHeight), 0);
         powerCount.text = "" + powerUpCount;
         Rigidbody rb = GetComponent<Rigidbody>();
 
         if(rb.GetAccumulatedForce() != new Vector3(0,0,0)){
             print(rb.GetAccumulatedForce());
         }
+
 
         // if(Input.GetKeyDown(KeyCode.J)){
         //     pressInterval = 0;
@@ -65,16 +64,16 @@ public class PlayerConfig : MonoBehaviour
             pressInterval += Time.deltaTime;
         }
 
-        if(Input.touchCount > 0){
-            wasTouchActive = true;
-        }
-        else{
-            wasTouchActive = false;
-        }
+        // if(Input.touchCount > 0){
+        //     wasTouchActive = true;
+        // }
+        // else{
+        //     wasTouchActive = false;
+        // }
 
-        if(Input.GetKeyUp(KeyCode.J) || pressInterval > maxPressInterval || (wasTouchActive && Input.touchCount == 0)){
+        if(Input.GetKeyUp(KeyCode.J) || pressInterval > maxPressInterval || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Ended)){
             insideJump = false;
-            float maxAdditionalForce = rb.mass * Mathf.Sqrt(2*Physics.gravity.magnitude*(maxHeight-1));
+            float maxAdditionalForce = rb.mass * Mathf.Sqrt(2*Physics.gravity.magnitude*(maxHeight-hopHeight));
             jumpForce = hopJumpForce + new Vector3(0,maxAdditionalForce,0)*pressInterval/maxPressInterval;
 
             if(grounded){
