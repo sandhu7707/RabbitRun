@@ -236,7 +236,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 15.97
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -261,7 +261,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.042875864, z: -0, w: 0.9990804}
-  m_LocalPosition: {x: 98.6, y: 180.5, z: 184.2}
+  m_LocalPosition: {x: 103.46, y: 180.5, z: 183.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 450178529}
-  offset: {x: 30, y: 0, z: -30}
+  offset: {x: 27, y: 0, z: -30}
   maxHeightGap: 3
   moveSpeed: 5
 --- !u!1 &410087039
@@ -482,7 +482,7 @@ MonoBehaviour:
   width: 240
   createNewDistanceThreshold: 200
   maxTerrainBlocks: 4
-  obstaclesDensity: 6
+  obstaclesDensity: 1
   powerUpsDensityFactor: 2
   minObstacleGap: 10
   jumpableObstaclePrefab: {fileID: 6655647843512570396, guid: 009a8e3b15f152a45b45758ef407bb58, type: 3}
@@ -522,31 +522,31 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.044907298
     - serializedVersion: 3
-      time: 178.54951
-      value: 143.92517
-      inSlope: 3.0908883
-      outSlope: 3.0908883
+      time: 183.24438
+      value: 153.52788
+      inSlope: 0.43804482
+      outSlope: 0.43804482
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.15836659
       outWeight: 0.08933486
     - serializedVersion: 3
-      time: 242.6637
-      value: 232.01263
-      inSlope: 2.4639654
-      outSlope: 2.4639654
+      time: 212.14697
+      value: 167.41264
+      inSlope: 1.0017178
+      outSlope: 1.0017178
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.32491153
     - serializedVersion: 3
-      time: 256.30948
-      value: 227.1123
-      inSlope: -4.61733
-      outSlope: -4.61733
+      time: 262.47147
+      value: 174.73395
+      inSlope: -0.57813257
+      outSlope: -0.57813257
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.28776684
+      inWeight: 0.34502977
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -571,25 +571,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
   m_PrefabInstance: {fileID: 1845061028}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &450178531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450178529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35afb079ed499034e835e1913787e431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPressInterval: 0.5
-  maxHeight: 10
-  moveSpeed: 5
-  minMoveSpeed: 10
-  speedIncreaseStep: 1
-  maxMoveSpeed: 30
-  powerCount: {fileID: 546360785}
 --- !u!54 &450178532
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -616,7 +597,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!95 &450178534
 Animator:
   serializedVersion: 7
@@ -639,11 +620,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!102 &546360785 stripped
-TextMesh:
-  m_CorrespondingSourceObject: {fileID: 5031411007355645758, guid: 5b35ed243d8bd1d4dbb4a1c7639dd7c9, type: 3}
-  m_PrefabInstance: {fileID: 1745178049703956079}
+--- !u!114 &450178536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450178529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c17f8d7454998b469744fc146055479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  maxMoveSpeed: 30
+  speedIncreaseStep: 1
+  jumpTriggerCollider: {fileID: 2108821321}
+  maxHeight: 10
+  maxPressInterval: 0.5
+  powerUpCount: 0
+  powerCount: {fileID: 1640188635}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +852,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18401b303495b40428a5873a3424e0ad, type: 3}
+--- !u!102 &1640188635 stripped
+TextMesh:
+  m_CorrespondingSourceObject: {fileID: 5031411007355645758, guid: 5b35ed243d8bd1d4dbb4a1c7639dd7c9, type: 3}
+  m_PrefabInstance: {fileID: 1745178049703956079}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1845061028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -866,27 +867,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.53331
+      value: 0.63890535
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.53331
+      value: 0.63890535
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.53331
+      value: 0.63890535
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 90.1
+      value: 87.833
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 187.1
+      value: 196.95
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 214.96
+      value: 214.97
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       propertyPath: m_LocalRotation.w
@@ -933,13 +934,16 @@ PrefabInstance:
       addedObject: {fileID: 450178532}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 450178531}
+      addedObject: {fileID: 450178534}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 450178534}
+      addedObject: {fileID: 450178536}
     - targetCorrespondingSourceObject: {fileID: 741808593568725213, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2108821321}
+    - targetCorrespondingSourceObject: {fileID: 741808593568725213, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2108821323}
     - targetCorrespondingSourceObject: {fileID: -4635513690382899818, guid: 3c2622d27febcc946b7fe0e2b3f6c330, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1307396560}
@@ -1043,6 +1047,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.01570882, y: 0.021125235, z: 0.04754662}
   m_Center: {x: 0.0013670247, y: 0.004079491, z: 0.0043663047}
+--- !u!135 &2108821323
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108821319}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.02301656
+  m_Center: {x: -0.0000000011696193, y: 0.010497386, z: 0.004968727}
 --- !u!1001 &1745178049703956079
 PrefabInstance:
   m_ObjectHideFlags: 0

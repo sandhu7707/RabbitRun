@@ -16,6 +16,8 @@ public class PlayerConfig : MonoBehaviour
     public float maxMoveSpeed;
     public TextMesh powerCount;
     float hopHeight = 0.5f;
+    float hopHeightDecending = 0.01f;
+    float hopHeightAscending = 1.2f;
     Vector3 jumpForce;
     Vector3 hopJumpForce;
     float lastVelocityY;
@@ -26,6 +28,8 @@ public class PlayerConfig : MonoBehaviour
     bool insideJump;
     [Min(1)]
     float gravityFactor=2;
+    float lastCollisionY;
+    float slopeDeciderThreshold = 0.5f;
 
     void Start(){
         moveSpeed = minMoveSpeed;
@@ -44,33 +48,16 @@ public class PlayerConfig : MonoBehaviour
                 hopDurationInitial = clip.length;
             }
         }
-        // GetComponent<Rigidbody>().AddForce(Physics.gravity*(gravityFactor-1), ForceMode.Acceleration);
     }
     void Update(){
 
         powerCount.text = "" + powerUpCount;
         Rigidbody rb = GetComponent<Rigidbody>();
-
-        if(rb.GetAccumulatedForce() != new Vector3(0,0,0)){
-            print(rb.GetAccumulatedForce());
-        }
-
-
-        // if(Input.GetKeyDown(KeyCode.J)){
-        //     pressInterval = 0;
-        // }
+        
 
         if(Input.GetKey(KeyCode.J) || Input.touchCount > 0){
             pressInterval += Time.deltaTime;
         }
-
-        // if(Input.touchCount > 0){
-        //     wasTouchActive = true;
-        // }
-        // else{
-        //     wasTouchActive = false;
-        // }
-
         if(Input.GetKeyUp(KeyCode.J) || pressInterval > maxPressInterval || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Ended)){
             insideJump = false;
             float maxAdditionalForce = rb.mass * Mathf.Sqrt(2*Physics.gravity.magnitude*(maxHeight-hopHeight));
@@ -82,9 +69,7 @@ public class PlayerConfig : MonoBehaviour
             }
             pressInterval = 0;
         }
-
         if(lastVelocityY > 0 && rb.linearVelocity.y <= 0){
-            // Decend();
             StartCoroutine(WaitForAnimationThenDecend());
         }
 
@@ -96,6 +81,7 @@ public class PlayerConfig : MonoBehaviour
             return;
         }
         insideJump = true;
+
         Rigidbody rb = GetComponent<Rigidbody>();
         
         // rb.linearVelocity = Vector3.zero;
@@ -107,11 +93,8 @@ public class PlayerConfig : MonoBehaviour
         float speedMultiplier = hopDurationInitial / timeToTop;
 
         animator.speed = speedMultiplier;
-        // animator.Play("Land and Hop", 0, 0f);
-        // animator.SetTrigger("Land");
         animator.Play("Hop");
-        // StartCoroutine(WaitForAnimationToEndThenPlay("Hop"));
-        grounded = false;
+        
     }
 
     IEnumerator WaitForAnimationThenDecend()
@@ -121,7 +104,6 @@ public class PlayerConfig : MonoBehaviour
         // Wait until the current animation is done
         while (currentState.normalizedTime < 1f)
         {
-            print(currentState.normalizedTime);
             currentState = animator.GetCurrentAnimatorStateInfo(0);
             yield return null;
         }
@@ -136,15 +118,16 @@ public class PlayerConfig : MonoBehaviour
         Collider[] colliders = GetComponentsInChildren<Collider>();
         float minY = colliders[0].bounds.min.y;
         Vector3 leadingColliderPos = colliders[0].bounds.center;
-
-        foreach(Collider col in colliders){
-            float currentMinY = col.bounds.min.y;
+        for(int i0=1; i0<colliders.Count(); i0++){
+            float currentMinY = colliders[i0].bounds.min.y;
+            leadingColliderPos += colliders[i0].bounds.center;
             if( currentMinY < minY){
                 minY = currentMinY;
-                leadingColliderPos = colliders[0].bounds.center;
-                leadingColliderPos.y = colliders[0].bounds.min.y;
             }
         }
+
+        leadingColliderPos = leadingColliderPos/colliders.Count();
+        leadingColliderPos.y = minY;
 
         Ray ray = new Ray(leadingColliderPos, Vector3.down);
         RaycastHit raycastHit;
@@ -155,28 +138,66 @@ public class PlayerConfig : MonoBehaviour
 
         animator.speed = speedMultiplier;
         animator.Play("Decend and Land");
-        // StartCoroutine(WaitForAnimationToEndThenPlay("Decend and Land"));
         insideJump = false;
-        // animator.SetTrigger("Decend");
     }
 
     void OnCollisionEnter(Collision collision){
+
         if(collision.gameObject.tag.Equals("Jumpable")){
-            // Bounds bounds = collision.gameObject.GetComponent<Renderer>().bounds;
-            // if(collision.contacts.Any(point => bounds.max.y-point.point.y > 0.1)){
-            //     moveSpeed=0;
-            // }
+
+            float currentCollisionY = collision.contacts.Average(it => it.point.y);
             grounded = true;
+
             if(jumpForce != new Vector3(0,0,0)){
                 Jump(jumpForce);
                 jumpForce = new Vector3(0,0,0);
             }
             else{
-                Jump(hopJumpForce);
+                if(lastCollisionY != null){
+                    if(lastCollisionY - currentCollisionY > slopeDeciderThreshold){
+                        print("descending");
+                        // newHopForce = new Vector3(0, GetComponent<Rigidbody>().mass * Mathf.Sqrt(2*Physics.gravity.magnitude*hopHeightDecending), 0);
+                        Collider[] colliders = GetComponentsInChildren<Collider>();
+                        float minY = colliders[0].bounds.min.y;
+                        Vector3 leadingColliderPos = colliders[0].bounds.center;
+
+                        for(int i0=1; i0<colliders.Count(); i0++){
+                            float currentMinY = colliders[i0].bounds.min.y;
+                                leadingColliderPos += colliders[i0].bounds.center;
+                                if( currentMinY < minY){
+                                    minY = currentMinY;
+                                }
+                        }
+
+                        leadingColliderPos = leadingColliderPos/colliders.Count();
+                        leadingColliderPos.y = minY;
+
+                        Ray ray = new Ray(leadingColliderPos, Vector3.down);
+                        RaycastHit raycastHit;
+
+                        if(Physics.Raycast(ray, out raycastHit) && raycastHit.distance > slopeDeciderThreshold){
+                            insideJump = true;
+                            Decend();
+                        }
+                        else{
+                            print("but not decending");
+                            Jump(hopJumpForce);
+                        }
+                    }
+                    else if(lastCollisionY - currentCollisionY < slopeDeciderThreshold){
+                        print("ascending");
+                        Vector3 newHopForce = new Vector3(0, GetComponent<Rigidbody>().mass * Mathf.Sqrt(2*Physics.gravity.magnitude*hopHeightAscending), 0);
+                        Jump(newHopForce);
+                    }
+                }
+                else{
+                    Jump(hopJumpForce);
+                }
+                lastCollisionY = currentCollisionY;
             }
         }
         if(collision.gameObject.tag.Equals("Avoidable")){
-            moveSpeed=0;
+            // moveSpeed=0;
         }
     }
 

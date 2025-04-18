@@ -31,7 +31,7 @@ public class ProceduralGeneration : MonoBehaviour
     bool requested;
     void Update()
     {
-        float moveSpeed = player.GetComponent<PlayerConfig>().moveSpeed;
+        float moveSpeed = player.GetComponent<PlayerMovement>().moveSpeed;
         transform.Translate(new Vector3(-Time.deltaTime*moveSpeed, 0, 0));
 
         if(lastTerrainBlock == null){

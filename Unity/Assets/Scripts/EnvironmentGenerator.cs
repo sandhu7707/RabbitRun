@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
-using Unity.Android.Gradle.Manifest;
 
 public class EnvironmentGenerator{
     public static GameObject GenerateEnvironment(float[,] heightMap, int obstaclesDensity, float powerUpsDensityFactor, GameObject player, GameObject jumpableObstaclePrefab, GameObject avoidableObstaclePrefab, GameObject powerUpPrefab, float minObstacleGap, MeshData meshData){
@@ -119,7 +118,7 @@ public class EnvironmentGenerator{
         List<Vector3> takenPositionEffective = new List<Vector3>(takenPositions);
         int length = heightMap.GetLength(0);
         int width = heightMap.GetLength(1);
-
+        density = density <=0 ? 1: density;
         int increment = Mathf.RoundToInt(length/density);
         // float playerZ = player.transform.position.z;
         int playerZ = width/2; //player is at z=width/2 w.r.t block
@@ -131,7 +130,7 @@ public class EnvironmentGenerator{
             
             if(randomizeY){
                 float minPowerUpsHeight = 2f;
-                float maxPowerUpsHeight = player.GetComponent<PlayerConfig>().maxHeight;
+                float maxPowerUpsHeight = player.GetComponent<PlayerMovement>().maxHeight;
                 y += Mathf.Lerp(minPowerUpsHeight, maxPowerUpsHeight, (float)new System.Random().NextDouble());
             }
 
