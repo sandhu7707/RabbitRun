@@ -4,14 +4,13 @@ using System;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 10;
+    public float moveSpeed = 0;
     public float maxMoveSpeed = 30;
     public float speedIncreaseStep = 1;
-    float hopHeight = 1f;
+    public float hopHeight = 1f;
     Animator animator;
     float decendDurationInitial;
     float hopDurationInitial;
-    public Collider jumpTriggerCollider;
     Rigidbody rb;
     float distanceYForHop;
     float pressInterval = 0;
@@ -20,10 +19,11 @@ public class PlayerMovement : MonoBehaviour
     float inputHopHeight=0;
     public int powerUpCount=0;
     public TextMesh powerCount;
-
+    int targetedMoveSpeed;
     void Start()
     {
-        moveSpeed = 10;  
+        targetedMoveSpeed = 10;  
+        moveSpeed = 2;
         animator = GetComponent<Animator>(); 
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
         foreach (var clip in clips)
@@ -40,9 +40,14 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    float lastLinearVelocityY=-1;
     void Update()
     {
+
+        if(targetedMoveSpeed > moveSpeed){
+            moveSpeed += Time.deltaTime*speedIncreaseStep;
+        }
+        // transform.position = new Vector3(87.79314f, transform.position.y, 214.3661f);
+        // transform.rotation = Quaternion.Euler(new Vector3(0,0,Mathf.Clamp(transform.rotation.eulerAngles.z,-10,10)));
     
         powerCount.text = "" + powerUpCount;
         AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
@@ -52,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
         // else if(currentState.normalizedTime >= 1.2f){ //.2 to allow for imprecision
         //     animator.Play("Idle");                                                               // issue: stops other animations
         // }
-        lastLinearVelocityY = rb.linearVelocity.y;
         CastRays();
 
         if(Input.GetKey(KeyCode.J) || Input.touchCount > 0){
@@ -76,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         float x = colliders.Max(it => it.bounds.max.x);
         float y = colliders.Min(it => it.bounds.min.y);
 
-        Vector3 rayOrigin = new Vector3(x + moveSpeed*hopDuration, y, jumpTriggerCollider.bounds.center.z);
+        Vector3 rayOrigin = new Vector3(x + moveSpeed*hopDuration/2, y, transform.position.z);
 
         CastRay(rayOrigin, Vector3.down, Color.green);
     }
@@ -155,7 +159,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Decend(){
-        animator.speed = Mathf.Min(decendDurationInitial/(hopDuration/2));
+        float timeToLand = (float)Math.Sqrt(2*Math.Abs(distanceYForHop)/Math.Abs(Physics.gravity.y));
+        animator.speed = decendDurationInitial/timeToLand;
         animator.Play("Decend and Land");
         betweenJumps = false;
     }

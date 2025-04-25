@@ -16,7 +16,7 @@ public class MeshGenerator{
 
                 float perlinNoise = Mathf.PerlinNoise(sampleX, sampleY);
 
-                heightMap[i0,i1] = perlinNoise*heightMultiplier+heightBase.Evaluate(i1);
+                heightMap[i0,i1] = perlinNoise*heightMultiplier;
             }
         }
     

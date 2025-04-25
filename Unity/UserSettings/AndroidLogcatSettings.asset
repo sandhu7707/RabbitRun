@@ -11,62 +11,26 @@
         {
             "deviceId": "23301FDEE002AD",
             "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 30740,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 31257,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 32064,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 25473,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 26290,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 26547,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 26791,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 27866,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 28595,
-            "exited": false
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
             "processId": 28946,
-            "exited": false
+            "exited": true
+        },
+        {
+            "deviceId": "23301FDEE002AD",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 3238,
+            "exited": true
+        },
+        {
+            "deviceId": "23301FDEE002AD",
+            "name": "com.google.android.apps.nexuslauncher",
+            "processId": 25368,
+            "exited": true
+        },
+        {
+            "deviceId": "23301FDEE002AD",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 10146,
+            "exited": true
         }
     ],
     "m_Tags": {
