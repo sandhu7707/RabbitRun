@@ -6,21 +6,35 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public GameObject player;
-    public Vector3 offset;
+    public Vector3 backOffset;
+    public Vector3 sideOffset;
     public float maxHeightGap;
     public float moveSpeed;
+    public CAMERA_TYPE cameraType;
+    CAMERA_TYPE oldCameraType;
+    [Serializable]
+    public enum CAMERA_TYPE{ BACK, SIDE};
+    public Vector3 playerOffset;
+
     void Start()
     {
-        gameObject.transform.position = player.transform.position + offset;
+        SetupCamera(true);
     }
-
     void Update()
     {
-        float heightGap = player.transform.position.y - transform.position.y;
-        if(Math.Abs(heightGap) > maxHeightGap){
-            float targetY = heightGap > 0 ? transform.position.y + heightGap - maxHeightGap : transform.position.y + heightGap + maxHeightGap;
-            float newY = Mathf.Lerp(transform.position.y, targetY, Time.deltaTime/(Mathf.Abs(heightGap)/moveSpeed));
-            transform.Translate(new Vector3(0, newY-transform.position.y, 0));
+        SetupCamera(false);
+        transform.LookAt(player.transform.position + playerOffset);
+    }
+
+    void SetupCamera(bool updateZ){
+        if(cameraType == CAMERA_TYPE.BACK){
+            gameObject.transform.rotation = Quaternion.Euler(new Vector3(22,90,0));
+            gameObject.transform.position = (updateZ ? player.transform.position : new Vector3(player.transform.position.x, player.transform.position.y, gameObject.transform.position.z)) + (updateZ ? backOffset : new Vector3(backOffset.x, backOffset.y, 0));
         }
+        else{
+            gameObject.transform.rotation = Quaternion.Euler(new Vector3(22,0,0));
+            gameObject.transform.position = player.transform.position + sideOffset;
+        }
+        oldCameraType = cameraType;
     }
 }

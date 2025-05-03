@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7f55b5aac9b6c448c4869198b3f749, type: 3}
+  m_Name: Right Slope Data
+  m_EditorClassIdentifier: 
+  width: 200
+  scale: 80
+  octaves: 3
+  persistance: 0.175
+  lacunarity: 4
+  offset: {x: 1200, y: 300}
+  heightBase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.47098547
+      outSlope: 0.47098547
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.084269956
+    - serializedVersion: 3
+      time: 80.27739
+      value: 70.89908
+      inSlope: 0.41433495
+      outSlope: 0.41433495
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 200.27739
+      value: 50.89908
+      inSlope: 0.43606734
+      outSlope: 0.43606734
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10254246
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  meshMaterial: {fileID: 2100000, guid: cb030c5817d9fc54bb14e2721d115db6, type: 2}
+  valuesUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  minPlantPatchDensity: 0.5
+  maxPlantPatchDensity: 20
+  cosmeticPlantStepx: 20
+  cosmeticPlantStepz: 20
+  plantPatchStepZ: 20

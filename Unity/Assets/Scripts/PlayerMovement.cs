@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEditor;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 0;
     public float maxMoveSpeed = 30;
     public float speedIncreaseStep = 1;
-    public float hopHeight = 1f;
+    public float hopHeight = 0.5f;
     Animator animator;
     float decendDurationInitial;
     float hopDurationInitial;
@@ -20,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     public int powerUpCount=0;
     public TextMesh powerCount;
     int targetedMoveSpeed;
+    bool everGrounded = false;
+    Quaternion targetRotation;
+    public GameObject playerPositon;
     void Start()
     {
         targetedMoveSpeed = 10;  
@@ -28,11 +32,11 @@ public class PlayerMovement : MonoBehaviour
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
         foreach (var clip in clips)
         {
-            if (clip.name == "Armature|decend_and_land")
+            if (clip.name == "Armature|decend.new")
             {
                 decendDurationInitial = clip.length;
             }
-            else if(clip.name == "Armature|hop")
+            else if(clip.name == "Armature|hop.new")
             {
                 hopDurationInitial = clip.length;
             }
@@ -42,22 +46,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         if(targetedMoveSpeed > moveSpeed){
             moveSpeed += Time.deltaTime*speedIncreaseStep;
         }
-        // transform.position = new Vector3(87.79314f, transform.position.y, 214.3661f);
-        // transform.rotation = Quaternion.Euler(new Vector3(0,0,Mathf.Clamp(transform.rotation.eulerAngles.z,-10,10)));
-    
+       
         powerCount.text = "" + powerUpCount;
         AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
         if(currentState.IsName("Hop") && currentState.normalizedTime >= 1f){
             Decend();
         }
-        // else if(currentState.normalizedTime >= 1.2f){ //.2 to allow for imprecision
-        //     animator.Play("Idle");                                                               // issue: stops other animations
-        // }
-        CastRays();
+        if(everGrounded){
+            CastRays();
+        }
 
         if(Input.GetKey(KeyCode.J) || Input.touchCount > 0){
             pressInterval += Time.deltaTime;
@@ -72,6 +72,12 @@ public class PlayerMovement : MonoBehaviour
             }
             pressInterval = 0;
         }
+        // if(targetRotation != null ){
+        //     // transform.parent.rotation = targetRotation;
+        //     transform.parent.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 2*Time.deltaTime/Math.Max(hopDuration,1));
+        // }
+        
+        // transform.rotation = Quaternion.Euler(0,0,Mathf.Clamp(transform.rotation.eulerAngles.z, -30, 30));
     }
 
     void CastRays(){
@@ -96,19 +102,25 @@ public class PlayerMovement : MonoBehaviour
         while(!Physics.Raycast(ray, out raycastHit)){
             ray = new Ray(origin+(++additionalSteps)*stepIncrement, dir);
         }
+
         Debug.DrawLine(ray.origin, raycastHit.point, color);
         distanceYForHop = additionalSteps*stepIncrement.y-raycastHit.distance;
         print("additionSteps: "+additionalSteps+", rayLength: "+raycastHit.distance+", finalDistance: "+distanceYForHop);
+        // targetRotation = Quaternion.LookRotation(new Vector3(moveSpeed*hopDuration/2,distanceYForHop,0));
+        
     }
 
     float lastTriggerTime = 0;
     bool betweenJumps = false;
     float hopDuration = 1;
     bool grounded = false;
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {   
+
         String otherTag = other.gameObject.tag;
         if(otherTag.Equals("Jumpable")){
+            // Editor.
+            everGrounded = true;
             grounded = true;
             if(betweenJumps){
                 return;
@@ -120,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             this.inputHopHeight = 0;
             float effectiveHopHeight = baseHopHeight+distanceYForHop;
             // float currentHopHeight = this.hopHeight;
-            hopDuration = (float)Math.Sqrt(2*Math.Abs(baseHopHeight)/Math.Abs(Physics.gravity.y))+(float)Math.Sqrt(2*Math.Abs(effectiveHopHeight)/Math.Abs(Physics.gravity.y));
+            hopDuration = (float)Math.Sqrt(2*Math.Abs(baseHopHeight)/Math.Abs(Physics.gravity.y))+(float)Math.Sqrt(2*Math.Max(baseHopHeight, effectiveHopHeight)/Math.Abs(Physics.gravity.y));
             if(lastTriggerTime!= 0){
                 print("time between triggers: " + (Time.time - lastTriggerTime));
                 print("hopDuration: " + hopDuration);
@@ -139,13 +151,6 @@ public class PlayerMovement : MonoBehaviour
             animator.Play("Hop");
             betweenJumps = true;
         }
-        else if(otherTag.Equals("PowerUp")){
-            Destroy(other.gameObject);
-            powerUpCount++;
-            if(moveSpeed < maxMoveSpeed){
-                moveSpeed+=speedIncreaseStep;
-            }
-        }
         else if(otherTag.Equals("Avoidable")){
             moveSpeed = 0;
             animator.StopPlayback();
@@ -153,16 +158,34 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag.Equals("PowerUp")){
+            Destroy(other.gameObject);
+            powerUpCount++;
+            if(moveSpeed < maxMoveSpeed){
+                moveSpeed+=speedIncreaseStep;
+            }
+        }
+    }
+
+    void OnCollisionExit(Collision other)
     {
         grounded = false;
     }
 
     void Decend(){
-        float timeToLand = (float)Math.Sqrt(2*Math.Abs(distanceYForHop)/Math.Abs(Physics.gravity.y));
+        // print(distanceYForHop);
+        // print(hopHeight);
+        // Debug.Break();
+        float timeToLand = (float)Math.Sqrt(2*Math.Max(hopHeight,0-distanceYForHop)/Math.Abs(Physics.gravity.y));
         animator.speed = decendDurationInitial/timeToLand;
         animator.Play("Decend and Land");
         betweenJumps = false;
+        
+        targetRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Clamp(Vector3.SignedAngle(new Vector3(1,0,0), new Vector3(moveSpeed*hopDuration/2,distanceYForHop+hopHeight,0), new Vector3(0,0,1)), -30, 30)));
+        print("target rotation: "+ targetRotation);
+
     }
 
 }

@@ -11,25 +11,25 @@
         {
             "deviceId": "23301FDEE002AD",
             "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 28946,
+            "processId": 4955,
             "exited": true
         },
         {
             "deviceId": "23301FDEE002AD",
             "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 3238,
-            "exited": true
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.google.android.apps.nexuslauncher",
-            "processId": 25368,
+            "processId": 5612,
             "exited": true
         },
         {
             "deviceId": "23301FDEE002AD",
             "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 10146,
+            "processId": 6743,
+            "exited": true
+        },
+        {
+            "deviceId": "23301FDEE002AD",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 7316,
             "exited": true
         }
     ],
@@ -106,8 +106,8 @@
     "m_ScreenCaptureSettings": {
         "Mode": 0,
         "m_LastSaveLocation": [
-            "D:\\git_repos\\RabbitRun-final\\Rabbit Run",
-            "D:\\git_repos\\RabbitRun-final\\Rabbit Run"
+            "C:\\Users\\prabh\\RabbitRun",
+            "C:\\Users\\prabh\\RabbitRun"
         ]
     },
     "m_QueryLayoutSettings": {

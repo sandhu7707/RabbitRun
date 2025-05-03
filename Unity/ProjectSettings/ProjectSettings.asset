@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 62adcbdac762c844b802fd50456ef75b
+  productGUID: d028d99a04401d6438761fc3aef6bfae
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Rabbit Run
+  productName: RabbitRun
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -554,9 +554,6 @@ PlayerSettings:
   - serializedVersion: 3
     m_BuildTarget: Android
     m_Formats: 03000000
-  - serializedVersion: 3
-    m_BuildTarget: WebGL
-    m_Formats: 05000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -843,14 +840,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Rabbit Run
+  metroPackageName: RabbitRun
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Rabbit Run
+  metroApplicationDescription: RabbitRun
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -922,10 +919,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 7f5b4d05-bea2-413d-92b8-e142ce577989
+  cloudProjectId: ad679c35-9a75-4a4a-91f3-7bc0c2dc506e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Rabbit Run 2025-04-14_09-55-29
+  projectName: RabbitRun
   organizationId: sandhu7707
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

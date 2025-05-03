@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7f55b5aac9b6c448c4869198b3f749, type: 3}
+  m_Name: Path
+  m_EditorClassIdentifier: 
+  width: 180
+  scale: 18
+  octaves: 3
+  persistance: 0.211
+  lacunarity: 4
+  offset: {x: 720, y: 160}
+  heightBase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 20
+      inSlope: -0.31666666
+      outSlope: -0.31666666
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 60
+      value: 1
+      inSlope: -0.012597009
+      outSlope: -0.012597009
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22937246
+      outWeight: 0.07984181
+    - serializedVersion: 3
+      time: 120
+      value: 1
+      inSlope: 0.076010205
+      outSlope: 0.076010205
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08035612
+      outWeight: 0.31785774
+    - serializedVersion: 3
+      time: 180
+      value: 20
+      inSlope: 0.31666666
+      outSlope: 0.31666666
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  meshMaterial: {fileID: 2100000, guid: cb030c5817d9fc54bb14e2721d115db6, type: 2}
+  valuesUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  minPlantPatchDensity: 1
+  maxPlantPatchDensity: 50
+  cosmeticPlantStepx: 40
+  cosmeticPlantStepz: 20
+  plantPatchStepZ: 20
