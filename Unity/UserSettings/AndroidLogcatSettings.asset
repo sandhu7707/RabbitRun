@@ -11,12 +11,6 @@
         {
             "deviceId": "23301FDEE002AD",
             "name": "com.UnityTechnologies.Mobile3DTemplate",
-            "processId": 4955,
-            "exited": true
-        },
-        {
-            "deviceId": "23301FDEE002AD",
-            "name": "com.UnityTechnologies.Mobile3DTemplate",
             "processId": 5612,
             "exited": true
         },
@@ -30,6 +24,12 @@
             "deviceId": "23301FDEE002AD",
             "name": "com.UnityTechnologies.Mobile3DTemplate",
             "processId": 7316,
+            "exited": true
+        },
+        {
+            "deviceId": "23301FDEE002AD",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 25021,
             "exited": true
         }
     ],

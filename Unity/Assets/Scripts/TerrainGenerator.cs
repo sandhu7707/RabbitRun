@@ -164,6 +164,7 @@ public class TerrainGenerator : MonoBehaviour
         meshFilter.sharedMesh = mesh;
         // meshCollider.sharedMesh = mesh;
         // meshCollider.GetOrAddComponent<TerrainCollisions>().offset = offset;
+        terrainData.terrainValues.meshMaterial.SetVector("playerPosition", player.transform.position);
         meshRenderer.sharedMaterial = terrainData.terrainValues.meshMaterial;
 
 
@@ -177,16 +178,33 @@ public class TerrainGenerator : MonoBehaviour
 
     void GenerateTerrainBlockData(int offset){
         
-        ThreadStart threadStart = delegate {
+        #if UNITY_WEBGL
+        // ThreadStart threadStart = delegate {
             TerrainBlockData terrainBlockData = ThreadLogic(offset);
             
-            lock(terrainBlockDataQueue){
+            // lock(terrainBlockDataQueue){
                 terrainBlockDataQueue.Enqueue(terrainBlockData);
-            }
-        };
+        //     }
+        // };
+        #endif
 
-        new Thread(threadStart).Start();
+        #if !UNITY_WEBGL
+            ThreadStart threadStart = delegate {
+                TerrainBlockData terrainBlockData = ThreadLogic(offset);
+                
+                lock(terrainBlockDataQueue){
+                    terrainBlockDataQueue.Enqueue(terrainBlockData);
+                }
+            };
+
+            Thread thread = new Thread(threadStart);
+            thread.Start();
+        #endif
+
+
+        // thread.Join();
         
+
     }
 
     TerrainBlockData ThreadLogic(int offset){
@@ -321,10 +339,10 @@ public class TerrainGenerator : MonoBehaviour
             rightCosmeticPlants.transform.position = rightExtension.transform.position;
             rightCosmeticPlants.transform.parent = rightExtension.transform;
 
-            // GameObject obstalces = terrainBlockData.path.obstaclesData.CreateObstacles();
+            GameObject obstalces = terrainBlockData.path.obstaclesData.CreateObstacles();
 
-            // obstalces.transform.position = path.transform.position;
-            // obstalces.transform.parent = path.transform;
+            obstalces.transform.position = path.transform.position;
+            obstalces.transform.parent = path.transform;
 
 
             AddColliders();

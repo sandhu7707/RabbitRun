@@ -119,7 +119,7 @@ public class MeshGenerator{
         for(int i0=0; i0<length; i0++){
             for(int i1=0; i1<width; i1++){
                 vertices[i1+i0*width] = new Vector3(i0, heightMap[i0,i1], i1);
-                uv[i1+i0*width] = new Vector2(i0/length, i1/width);
+                uv[i1+i0*width] = new Vector2((float)i0/length, (float)i1/width);
 
                 if(i0 != length-1 && i1!=width-1){
                     triangles[triangleIndex++] = (i0)*width+(i1);
