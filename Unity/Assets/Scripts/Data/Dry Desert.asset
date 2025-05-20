@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e8e27aa5350cc64f8876b30bd4a17c2, type: 3}
+  m_Name: Dry Desert
+  m_EditorClassIdentifier: 
+  width: 800
+  scale: 116
+  octaves: 3
+  persistance: 0.194
+  lacunarity: 6
+  heightBase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.8
+      inSlope: 0.0064409524
+      outSlope: 0.0064409524
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.103429295
+    - serializedVersion: 3
+      time: 200.11285
+      value: 0.75141037
+      inSlope: -0.0010279089
+      outSlope: -0.0010279089
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13009195
+    - serializedVersion: 3
+      time: 350.69348
+      value: 0.005
+      inSlope: -0.0012820442
+      outSlope: -0.0012820442
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24116951
+      outWeight: 0.18619
+    - serializedVersion: 3
+      time: 401.0892
+      value: -0.0010089981
+      inSlope: -0.00000022885855
+      outSlope: -0.00000022885855
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 450.69348
+      value: 0.005
+      inSlope: 0.0008809646
+      outSlope: 0.0008809646
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15819702
+      outWeight: 0.17212014
+    - serializedVersion: 3
+      time: 600.51636
+      value: 0.74887526
+      inSlope: 0.0015952486
+      outSlope: 0.0015952486
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13482076
+      outWeight: 0.20280387
+    - serializedVersion: 3
+      time: 800
+      value: 0.8
+      inSlope: -0.0062627397
+      outSlope: -0.0062627397
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10404211
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  meshMaterial: {fileID: 2100000, guid: 6eb3dc2807b417d4190627a72e8b4047, type: 2}
+  valuesUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  minPlantPatchDensity: 0
+  maxPlantPatchDensity: 0
+  cosmeticPlantStepx: 0
+  cosmeticPlantStepz: 0
+  plantPatchStepZ: 0
+  heightMultiplier: 50
+  maxHeight: 50
+  minHeight: 20
+  pathLength: 100
